@@ -27,5 +27,4 @@ $result=$router->minimal('Париж', 'Берлин', $list);
 print_r($result);
 
 print "JSON для AJAX коннекторов:\n";
-print "JSON: ".json_encode($result, JSON_UNESCAPED_UNICODE);
-
+print json_encode($result, JSON_UNESCAPED_UNICODE);
