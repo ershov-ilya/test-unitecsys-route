@@ -9,12 +9,16 @@
  * Time: 12:00
  */
 
+header( 'Content-Type: text/plain; charset=utf-8' ) ;
+define('DEBUG' , true) ;
+defined( 'DEBUG') or define('DEBUG' , false) ;
+
 require_once('../dist/MapRouter.class.php');
 
 // Формируем список согласно задачи
 $json=file_get_contents('data.json');
 $list=(array)json_decode($json);
-
+//if(DEBUG) print_r($list);
 
 $router=new Routes\MapRouter();
 $router->minimal('Париж', 'Берлин', $list);
