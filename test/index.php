@@ -21,5 +21,10 @@ $list=(array)json_decode($json);
 //if(DEBUG) print_r($list);
 
 $router=new Routes\MapRouter();
-$router->minimal('Париж', 'Берлин', $list);
+$result=$router->minimal('Париж', 'Берлин', $list);
+
+print_r($result);
+
+print "JSON для AJAX коннекторов:\n";
+print "JSON: ".json_encode($result, JSON_UNESCAPED_UNICODE);
 

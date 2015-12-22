@@ -12,6 +12,7 @@ namespace Routes;
 class MapRouter {
     // Массив провереных городов
     private static $checked=array();
+    // Карта цен (двунаправленная)
     private static $map=array();
 
     public static function minimal($from, $to, $list=array()){
@@ -33,7 +34,25 @@ class MapRouter {
 
         // Ищем оптимальную цену
         MapRouter::recurseReach($from, 'Старт');
-        print_r(MapRouter::$checked);
+        //print_r(MapRouter::$checked);
+
+        // Формируем ответ
+        // Если город был достигнут
+        $route=array();
+        if(isset(MapRouter::$checked[$to]['cost'])){
+            $city=$to;
+            $route[]=$city;
+            do{
+                $city=MapRouter::$checked[$city]['prev'];
+                $route[]=$city;
+            }while($city!=$from);
+        }
+        $route=array_reverse($route);
+        $total_price=MapRouter::$checked[$to]['cost'];
+        return array(
+            'route'         =>  $route,
+            'total_price'   =>  $total_price
+        );
     }
 
     private static function recurseReach($from, $prev='', $cost_before=0){
@@ -42,9 +61,9 @@ class MapRouter {
             'prev'      =>  $prev,
             'reached'   =>  true
         );
-        print "\nТочка $from\n";
-        print_r(MapRouter::$checked[$from]);
-        sleep(1);
+//        print "\nТочка $from\n";
+//        print_r(MapRouter::$checked[$from]);
+//        sleep(1);
 
         // Прикидываем стоимость достижения
         foreach(MapRouter::$map[$from] as $city => $cost){
