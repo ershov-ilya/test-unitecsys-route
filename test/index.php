@@ -9,16 +9,13 @@
  * Time: 12:00
  */
 
-//require_once('../dist/minRoute.class.php');
+require_once('../dist/MapRouter.class.php');
 
-$json=file_get_contents('data.json');
 // Формируем список согласно задачи
+$json=file_get_contents('data.json');
 $list=(array)json_decode($json);
 
-print_r($list);
-exit;
 
-
-$route=new Routes\minRoute();
-
+$router=new Routes\MapRouter();
+$router->minimal('Париж', 'Берлин', $list);
 
