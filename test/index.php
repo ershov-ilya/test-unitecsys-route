@@ -21,6 +21,7 @@ $list=(array)json_decode($json);
 //if(DEBUG) print_r($list);
 
 $router=new Routes\MapRouter();
+// Функция которую заказывали:
 $result=$router->minimal('Париж', 'Берлин', $list);
 
 print_r($result);
