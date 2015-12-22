@@ -19,6 +19,10 @@ class MapRouter {
             $map[$city[0]][$city[1]]=$v;
         }
 
+        // Проверяем наличие точек на нашей карте
+        if(!isset($map[$from])) return "Error: Не найден город Откуда";
+        if(!isset($map[$to])) return "Error: Не найден город Куда";
+
 
         //print_r($map);
     }
